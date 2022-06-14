@@ -14,11 +14,11 @@ export const getLocalidades = async (req,res)=>{
 export const getLocalidadId = async (req,res)=>{
     try { // select * from fc_listar_post_id(1);
         const id = parseInt(req.params.id);
-        const response = await pool.query('select *from fc_listar_post_id($1)',[id]);
+        const response = await pool.query('select * from localidad where idlocalidad = ($1)',[id]);
         return res.status(200).json(response.rows);
     } catch (e) {
         console.log(e);
-        return res.status(500).json('Error al listar Post');
+        return res.status(500).json('Error al listar Localidad');
     }
 };
 
