@@ -23,8 +23,8 @@ controller.search = async (req, res) => {
 };
 
 controller.save = async (req, res) => {
-    const {id,nombre} = req.body;
-    conn.query("insert into departamento values(?,?);", [id,nombre], function (err, result) {
+    const { id, nombre } = req.body;
+    conn.query("insert into departamento values(?,?);", [id, nombre], function (err, result) {
         try {
             return res.status(200).json(result);
         } catch (error) {
@@ -35,10 +35,10 @@ controller.save = async (req, res) => {
 
 controller.edit = async (req, res) => {
     const id = parseInt(req.params.id);
-    const {nombre} = req.body;
-    conn.query("update departamento set nombre = ? where iddepartamento = ?;", [nombre,id], function (err, result) {
+    const { nombre } = req.body;
+    conn.query("update departamento set nombre = ? where iddepartamento = ?;", [nombre, id], function (err, result) {
         try {
-            return res.status(200).json({message:'Modificado correctamente'});
+            return res.status(200).json({ message: 'Modificado correctamente' });
         } catch (error) {
             return res.status(500).json('Error al editar ' + e);
         }
@@ -49,7 +49,7 @@ controller.delete = async (req, res) => {
     const id = parseInt(req.params.id);
     conn.query("delete from departamento where iddepartamento = ?;", [id], function (err, result) {
         try {
-            return res.status(200).json({message:'Eliminado correctamente'});
+            return res.status(200).json({ message: 'Eliminado correctamente' });
         } catch (error) {
             return res.status(500).json('Error al eliminar ' + e);
         }

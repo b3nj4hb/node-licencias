@@ -6,7 +6,7 @@ controller.list = async (req, res) => {
         try {
             return res.status(200).json(result);
         } catch (error) {
-            return res.status(500).json('Error al listar '+ e);
+            return res.status(500).json('Error al listar ' + e);
         }
     });
 };
@@ -23,8 +23,8 @@ controller.search = async (req, res) => {
 };
 
 controller.save = async (req, res) => {
-    const {id,rol} = req.body;
-    conn.query("insert into rol values(?,?);", [id,rol], function (err, result) {
+    const { id, rol } = req.body;
+    conn.query("insert into rol values(?,?);", [id, rol], function (err, result) {
         try {
             return res.status(200).json(result);
         } catch (error) {
@@ -35,10 +35,10 @@ controller.save = async (req, res) => {
 
 controller.edit = async (req, res) => {
     const id = parseInt(req.params.id);
-    const {rol} = req.body;
-    conn.query("update rol set rol = ? where idrol = ?;", [rol,id], function (err, result) {
+    const { rol } = req.body;
+    conn.query("update rol set rol = ? where idrol = ?;", [rol, id], function (err, result) {
         try {
-            return res.status(200).json({message:'Modificado correctamente'});
+            return res.status(200).json({ message: 'Modificado correctamente' });
         } catch (error) {
             return res.status(500).json('Error al editar ' + e);
         }
@@ -49,7 +49,7 @@ controller.delete = async (req, res) => {
     const id = parseInt(req.params.id);
     conn.query("delete from rol where idrol = ?;", [id], function (err, result) {
         try {
-            return res.status(200).json({message:'Eliminado correctamente'});
+            return res.status(200).json({ message: 'Eliminado correctamente' });
         } catch (error) {
             return res.status(500).json('Error al eliminar ' + e);
         }
