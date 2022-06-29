@@ -2,7 +2,7 @@ import { conn } from "../database";
 const controller = {};
 
 controller.list = async (req, res) => {
-    conn.query("select * from localidad;", function (err, result) {
+    conn.query("select * from voucher_pago;", function (err, result) {
         try {
             return res.status(200).json(result);
         } catch (error) {
@@ -13,7 +13,7 @@ controller.list = async (req, res) => {
 
 controller.search = async (req, res) => {
     const id = parseInt(req.params.id);
-    conn.query("select * from localidad where idlocalidad = ?;", [id], function (err, result) {
+    conn.query("select * from voucher_pago where idvoucher = ?;", [id], function (err, result) {
         try {
             return res.status(200).json(result);
         } catch (error) {
@@ -23,8 +23,8 @@ controller.search = async (req, res) => {
 };
 
 controller.save = async (req, res) => {
-    const { id, referencia, direccion, iddistrito } = req.body;
-    conn.query("insert into localidad values(?,?,?,?);", [id, referencia, direccion, iddistrito], function (err, result) {
+    const { id, fecha, idtipo_riesgo, idpersona } = req.body;
+    conn.query("insert into voucher_pago values(?,?,?,?);", [id, fecha, idtipo_riesgo, idpersona], function (err, result) {
         try {
             return res.status(200).json(result);
         } catch (error) {
@@ -35,8 +35,8 @@ controller.save = async (req, res) => {
 
 controller.edit = async (req, res) => {
     const id = parseInt(req.params.id);
-    const { referencia } = req.body;
-    conn.query("update localidad set referencia = ?, direccion = ?, iddistrito = ? where idlocalidad = ?;", [iddistrito, direccion, referencia, id], function (err, result) {
+    const { fecha } = req.body;
+    conn.query("update voucher_pago set fecha = ?, idtipo_riesgo = ?, idpersona = ? where idvoucher = ?;", [idpersona, idtipo_riesgo, fecha, id], function (err, result) {
         try {
             return res.status(200).json({ message: 'Modificado correctamente' });
         } catch (error) {
@@ -47,7 +47,7 @@ controller.edit = async (req, res) => {
 
 controller.delete = async (req, res) => {
     const id = parseInt(req.params.id);
-    conn.query("delete from localidad where idlocalidad = ?;", [id], function (err, result) {
+    conn.query("delete from voucher_pago where idvoucher = ?;", [id], function (err, result) {
         try {
             return res.status(200).json({ message: 'Eliminado correctamente' });
         } catch (error) {

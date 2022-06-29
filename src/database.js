@@ -1,36 +1,17 @@
- import { Pool } from 'pg'
+var mysql = require('mysql');
 
- export const pool = new Pool({
-     host:'ec2-34-198-186-145.compute-1.amazonaws.com',
-     user:'rbtdjdgiuiaclx',
-     password:'973e467689fab6622575e63c49692a4a524b9be5635e4cd2ded83ebe61bd4f2f',
-     database: 'df5h8os2c1g906',
-     port:5432,
-     ssl:{rejectUnauthorized:false}
- });
+export const conn = mysql.createConnection({
+    host: 'n4m3x5ti89xl6czh.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
+    user: 'nx875blgp3s1gx8r',
+    password: 'x9j824ls2b1ionbi',
+    database: 'qv6rluhzvagarjun'
+});
 
-// const mysql = require("mysql");
-// // Coloca aquí tus credenciales
-// module.exports = mysql.createPool({
-//   host: "localhost",
-//   user: "root",
-//   password: "admin",
-//   database: "licencias"
-// });
+conn.connect(function (err) {
+    if (err) {
+        console.error('error connecting: ' + err.stack);
+        return;
+    }
 
-// var mysql      = require('mysql');
-// var connection = mysql.createConnection({
-//   host     : 'localhost',
-//   user     : 'root',
-//   password : 'admin',
-//   database: "licencias"
-// });
- 
-// connection.connect(function(err) {
-//     if (err) {
-//       console.error('error connecting: ' + err.stack);
-//       return;
-//     }
-   
-//     console.log('connected as id ' + connection.threadId);
-//   });
+    console.log('connected as id ' + conn.threadId);
+});

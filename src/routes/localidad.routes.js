@@ -1,13 +1,11 @@
-import { Router } from 'express';
+const router = require('express').Router();
 
-const router = Router();
-// import * as localidadCrtl from '../controllers/post.controller'
-import * as localidadCrtl from '../controllers/localidad.controller'
+const localidad = require('../controllers/localidad.controller');
 
-router.get('/', localidadCrtl.getLocalidades);
-router.get('/:id', localidadCrtl.getLocalidadId);
-router.post('/', localidadCrtl.crearLocalidad);
-router.put('/:id', localidadCrtl.updateLocalidad);
-router.delete('/:id', localidadCrtl.deleteLocalidad);
+router.get('/', localidad.list);
+router.get('/:id', localidad.search);
+router.post('/add', localidad.save);
+router.put('/update/:id', localidad.edit);
+router.delete('/delete/:id', localidad.delete);
 
 export default router;
