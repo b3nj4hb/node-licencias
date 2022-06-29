@@ -2,7 +2,7 @@ import { conn } from "../database";
 const controller = {};
 
 controller.list = async (req, res) => {
-    conn.query("select * from localidad;", function (err, result) {
+    conn.query("select * from usuario;", function (err, result) {
         try {
             return res.status(200).json(result);
         } catch (error) {
