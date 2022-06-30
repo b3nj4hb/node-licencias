@@ -13,6 +13,8 @@ import tipo_persona from './routes/tipo_persona.routes'
 import tipo_riesgo from './routes/tipo_riesgo.routes'
 import usuario from './routes/usuario.routes'
 import voucher_pago from './routes/voucher_pago.routes'
+import authRoutes from './routes/auth.routes'
+
 
 const app = express();
 var cors = require('cors');
@@ -24,6 +26,7 @@ app.get('/',(req,res)=>{
     res.send('Bienvenido a Node JS..!');
 });
 
+// app.use('/api/auth', authRoutes);
 app.use('/api/auth/departamento', departamento);
 app.use('/api/auth/distrito', distrito);
 app.use('/api/auth/localidad', localidad);
