@@ -22,9 +22,22 @@ controller.search = async (req, res) => {
     });
 };
 
+/*
 controller.save = async (req, res) => {
     const { id, idtipo_persona, nombre, ape_pat, ape_mat, idtipo_documento, num_documento, ruc, correo, direccion_notificacion, telefono } = req.body;
     conn.query("insert into persona values(?,?,?,?,?,?,?,?,?,?,?);", [id, idtipo_persona, nombre, ape_pat, ape_mat, idtipo_documento, num_documento, ruc, correo, direccion_notificacion, telefono], function (err, result) {
+        try {
+            return res.status(200).json(result);
+        } catch (error) {
+            return res.status(500).json('Error al crear ' + e);
+        }
+    });
+};
+*/
+
+controller.save = async (req, res) => {
+    const { idtipo_persona, nombre, ape_pat, ape_mat, idtipo_documento, num_documento, ruc, correo, direccion_notificacion, telefono } = req.body;
+    conn.query("CALL SP_INS_PERSONA( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, @V_ID );", [idtipo_persona, nombre, ape_pat, ape_mat, idtipo_documento, num_documento, ruc, correo, direccion_notificacion, telefono], function (err, result) {
         try {
             return res.status(200).json(result);
         } catch (error) {
