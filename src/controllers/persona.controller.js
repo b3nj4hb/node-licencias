@@ -69,4 +69,29 @@ controller.delete = async (req, res) => {
     });
 };
 
+controller.retornarid = async (req, res) => {
+    const ruc = parseInt(req.params.ruc);
+    const num_documento = parseInt(req.params.num_documento);
+    // const { ruc, num_documento } = req.body;
+    conn.query("select idpersona  from persona where ruc = ? and num_documento = ?;", [ruc, num_documento], function (err, result) {
+        try {
+            return res.status(200).json(result);
+        } catch (error) {
+            return res.status(500).json('Error al retornarid ' + e);
+        }
+    });
+};
+
+controller.updurl = async (req, res) => {
+    const id = parseInt(req.params.id);
+    const { url } = req.body;
+    conn.query("update persona set url = ? where idpersona = ?;", [url, id], function (err, result) {
+        try {
+            return res.status(200).json({ message: 'Actualizado correctamente' });
+        } catch (error) {
+            return res.status(500).json('Error al actualizar ' + e);
+        }
+    });
+};
+
 module.exports = controller;
