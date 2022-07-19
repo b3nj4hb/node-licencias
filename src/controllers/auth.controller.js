@@ -1,4 +1,3 @@
-import { response } from "express";
 import { conn } from "../database";
 
 const controller = {}

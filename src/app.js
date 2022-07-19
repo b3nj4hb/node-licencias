@@ -25,7 +25,7 @@ app.get('/', (req, res) => {
     res.send('Bienvenido a Node JS..!');
 });
 
-// app.use('/api/auth', auth)
+app.use('/api/auth', auth)
 app.use('/api/auth/departamento', departamento);
 app.use('/api/auth/distrito', distrito);
 app.use('/api/auth/localidad', localidad);
