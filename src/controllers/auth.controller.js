@@ -9,7 +9,7 @@ const refreshTokens = [];
 
 controller.login = async (req, res) => {
     const { username, password } = req.body;
-    console.log('~~ post ~~\n' + 'username: ' + username + '\npassword: ' + password + '\n~~~~~~~~~~~~')
+    // console.log('~~ post ~~\n' + 'username: ' + username + '\npassword: ' + password + '\n~~~~~~~~~~~~')
     conn.query("call sp_validar_usuario(?);", [username], function (err, result) {
         try {
             // Hashear password
