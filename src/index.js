@@ -1,5 +1,5 @@
 import app from './app'
-const config = require('./libs/config.json')
-app.listen(config.port);
-
-console.log('server listen on port: ',config.port);
+var port = process.env.PORT || 3000;
+app.listen(port, () => {
+    console.log('server listen on port: ',port);
+});
