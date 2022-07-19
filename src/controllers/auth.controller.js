@@ -8,15 +8,15 @@ const bcrypt = require('bcryptjs');
 const refreshTokens = [];
 
 controller.login = async (req, res) => {
-    const { username, password } = req.body;
+    const { user, password } = req.body;
     // console.log('~~ post ~~\n' + 'username: ' + username + '\npassword: ' + password + '\n~~~~~~~~~~~~')
-    conn.query("call sp_validar_usuario(?);", [username], function (err, result) {
+    conn.query("call sp_validar_usuario(?);", [user], function (err, result) {
         try {
             // Hashear password
             // let passwordhashed = bcrypt.hashSync(password, 8);
             // console.log({ message: passwordhashed })
             const rUser = result[0][0].user;
-            if (rUser == username) {
+            if (rUser == user) {
                 const hashSaved = result[0][0].password;
                 let compare = bcrypt.compareSync(password, hashSaved);
                 if (compare) {
@@ -45,11 +45,11 @@ controller.login = async (req, res) => {
 
 controller.registrar = async (req, res) => {
     let sql = "call sp_ins_usuario (?,?,?);"
-    const { usuario, password, idpersona } = req.body;
+    const { user, password, idpersona } = req.body;
     // Hashear password
     let passwordhashed = bcrypt.hashSync(password, 8);
     // console.log({ message: passwordhashed })
-    conn.query(sql, [usuario, passwordhashed, idpersona], function (err, result) {
+    conn.query(sql, [user, passwordhashed, idpersona], function (err, result) {
         try {
             return res.json({ result });
         } catch (error) {
