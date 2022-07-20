@@ -1,7 +1,6 @@
 import express from 'express'
 import morgan from 'morgan'
 
-import auth from './routes/auth.routes'
 import departamento from './routes/departamento.routes'
 import distrito from './routes/distrito.routes'
 import localidad from './routes/localidad.routes'
@@ -25,7 +24,6 @@ app.get('/', (req, res) => {
     res.send('Bienvenido a Node JS..!');
 });
 
-app.use('/api/auth', auth)
 app.use('/api/auth/departamento', departamento);
 app.use('/api/auth/distrito', distrito);
 app.use('/api/auth/localidad', localidad);
