@@ -23,8 +23,8 @@ controller.search = async (req, res) => {
 };
 
 controller.save = async (req, res) => {
-    const { id, referencia, direccion, iddistrito } = req.body;
-    conn.query("insert into localidad values(?,?,?,?);", [id, referencia, direccion, iddistrito], function (err, result) {
+    const {referencia, direccion, iddistrito } = req.body;
+    conn.query("insert into localidad values(null,?,?,?);", [referencia, direccion, iddistrito], function (err, result) {
         try {
             return res.status(200).json(result);
         } catch (error) {
