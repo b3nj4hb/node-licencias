@@ -112,7 +112,7 @@ controller.buscarlocalidad = async (req, res) => {
 };
 
 controller.listarcontribuyentes = async (req, res) => {
-    const query = 'select p.ruc, p.url ,p.correo ,p.telefono, td.tipo_documento, '
+    const query = 'select p.idpersona, p.ruc, p.url ,p.correo ,p.telefono, td.tipo_documento, '
     +'p.num_documento, tp.tipo_persona, '
     +'p.direccion_notificacion, concat(p.nombre," ",p.ape_pat," ",p.ape_mat)nombres '
     +'from rol r '
