@@ -56,4 +56,17 @@ controller.delete = async (req, res) => {
     });
 };
 
+controller.retornarid = async (req, res) => {
+    const referencia = String(req.params.referencia);
+    const direccion = String(req.params.direccion);
+    // const { ruc, num_documento } = req.body;
+    conn.query("select idlocalidad from localidad where referencia = ? and direccion = ?;", [referencia, direccion], function (err, result) {
+        try {
+            return res.status(200).json(result);
+        } catch (error) {
+            return res.status(500).json('Error al retornarid ' + e);
+        }
+    });
+};
+
 module.exports = controller;

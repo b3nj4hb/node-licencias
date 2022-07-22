@@ -94,4 +94,40 @@ controller.updurl = async (req, res) => {
     });
 };
 
+controller.buscarlocalidad = async (req, res) => {
+    const query = 'select l.referencia ,l.direccion ,d.nombre '
+    +'from persona p '
+    +'join persona_localidad pl on p.idpersona = pl.idpersona '
+    +'join localidad l on pl.idlocalidad = l.idlocalidad '
+    +'join distrito d on l.iddistrito = d.iddistrito '
+    +'where p.idpersona = ?;'
+    const id = parseInt(req.params.id);
+    conn.query(query, [id], function (err, result) {
+        try {
+            return res.status(200).json(result);
+        } catch (error) {
+            return res.status(500).json('Error al buscar ' + e);
+        }
+    });
+};
+
+controller.listarcontribuyentes = async (req, res) => {
+    const query = 'select p.ruc, p.url ,p.correo ,p.telefono, td.tipo_documento, '
+    +'p.num_documento, tp.tipo_persona, '
+    +'p.direccion_notificacion, concat(p.nombre," ",p.ape_pat," ",p.ape_mat)nombres '
+    +'from rol r '
+    +'join usuario u on r.idrol = u.idrol '
+    +'join persona p on u.idpersona = p.idpersona '
+    +'join tipo_documento td on p.idtipo_documento = td.idtipo_documento '
+    +'join tipo_persona tp on p.idtipo_persona = tp.idtipo_persona '
+    +'where r.idrol = 2;'
+    conn.query(query, function (err, result) {
+        try {
+            return res.status(200).json(result);
+        } catch (error) {
+            return res.status(500).json('Error al listar ' + e);
+        }
+    });
+};
+
 module.exports = controller;
