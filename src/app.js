@@ -15,11 +15,16 @@ import tipo_riesgo from './routes/tipo_riesgo.routes'
 import usuario from './routes/usuario.routes'
 import voucher_pago from './routes/voucher_pago.routes'
 
+const bodyparser = require('body-parser');
 const app = express();
 var cors = require('cors');
 app.use(express.json());
 app.use(cors());
 app.use(morgan('dev'));
+var nodemailer = require("nodemailer");
+app.use(bodyparser.json());
+app.use(bodyparser.urlencoded({extended:false}));
+app.use(require('./routes/correo.routes'))
 
 app.get('/', (req, res) => {
     res.send('Bienvenido a Node JS..!');
