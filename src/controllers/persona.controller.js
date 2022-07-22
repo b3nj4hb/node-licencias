@@ -95,7 +95,7 @@ controller.updurl = async (req, res) => {
 };
 
 controller.buscarlocalidad = async (req, res) => {
-    const query = 'select l.referencia ,l.direccion ,d.nombre '
+    const query = 'select l.referencia ,l.direccion ,d.nombre distrito '
     +'from persona p '
     +'join persona_localidad pl on p.idpersona = pl.idpersona '
     +'join localidad l on pl.idlocalidad = l.idlocalidad '
