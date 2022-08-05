@@ -14,6 +14,7 @@ import tipo_persona from './routes/tipo_persona.routes.js'
 import tipo_riesgo from './routes/tipo_riesgo.routes.js'
 import usuario from './routes/usuario.routes.js'
 import voucher_pago from './routes/voucher_pago.routes.js'
+import auth from './routes/auth.routes.js'
 
 const app = express();
 // var cors = require('cors');
@@ -36,7 +37,7 @@ app.use('/api/auth/tipo_documento', tipo_documento);
 app.use('/api/auth/tipo_persona', tipo_persona);
 app.use('/api/auth/tipo_riesgo', tipo_riesgo);
 app.use('/api/auth/usuario', usuario);
-app.use('/api/auth/usuario', usuario);
 app.use('/api/auth/voucher_pago', voucher_pago);
+app.use('/api/auth', auth)
 
 export default app;
