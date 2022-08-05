@@ -1,21 +1,22 @@
 import express from 'express'
 import morgan from 'morgan'
+import cors from 'cors'
 
-import departamento from './routes/departamento.routes'
-import distrito from './routes/distrito.routes'
-import localidad from './routes/localidad.routes'
-import persona_localidad from './routes/persona_localidad.routes'
-import persona from './routes/persona.routes'
-import provincia from './routes/provincia.routes'
-import rol from './routes/rol.routes'
-import tipo_documento from './routes/tipo_documento.routes'
-import tipo_persona from './routes/tipo_persona.routes'
-import tipo_riesgo from './routes/tipo_riesgo.routes'
-import usuario from './routes/usuario.routes'
-import voucher_pago from './routes/voucher_pago.routes'
+import departamento from './routes/departamento.routes.js'
+import distrito from './routes/distrito.routes.js'
+import localidad from './routes/localidad.routes.js'
+import persona_localidad from './routes/persona_localidad.routes.js'
+import persona from './routes/persona.routes.js'
+import provincia from './routes/provincia.routes.js'
+import rol from './routes/rol.routes.js'
+import tipo_documento from './routes/tipo_documento.routes.js'
+import tipo_persona from './routes/tipo_persona.routes.js'
+import tipo_riesgo from './routes/tipo_riesgo.routes.js'
+import usuario from './routes/usuario.routes.js'
+import voucher_pago from './routes/voucher_pago.routes.js'
 
 const app = express();
-var cors = require('cors');
+// var cors = require('cors');
 app.use(express.json());
 app.use(cors());
 app.use(morgan('dev'));

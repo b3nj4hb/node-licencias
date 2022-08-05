@@ -1,7 +1,7 @@
-import { conn } from "../database";
+import { conn } from "../database.js";
 const controller = {};
 
-controller.list = async (req, res) => {
+export const list = async (req, res) => {
     conn.query("select * from persona;", function (err, result) {
         try {
             return res.status(200).json(result);
@@ -11,7 +11,7 @@ controller.list = async (req, res) => {
     });
 };
 
-controller.search = async (req, res) => {
+export const search = async (req, res) => {
     const id = parseInt(req.params.id);
     conn.query("select * from persona where idpersona = ?;", [id], function (err, result) {
         try {
@@ -23,7 +23,7 @@ controller.search = async (req, res) => {
 };
 
 /*
-controller.save = async (req, res) => {
+export const save = async (req, res) => {
     const { id, idtipo_persona, nombre, ape_pat, ape_mat, idtipo_documento, num_documento, ruc, correo, direccion_notificacion, telefono } = req.body;
     conn.query("insert into persona values(?,?,?,?,?,?,?,?,?,?,?);", [id, idtipo_persona, nombre, ape_pat, ape_mat, idtipo_documento, num_documento, ruc, correo, direccion_notificacion, telefono], function (err, result) {
         try {
@@ -35,7 +35,7 @@ controller.save = async (req, res) => {
 };
 */
 
-controller.save = async (req, res) => {
+export const save = async (req, res) => {
     const { idtipo_persona, nombre, ape_pat, ape_mat, idtipo_documento, num_documento, ruc, correo, direccion_notificacion, telefono } = req.body;
     conn.query("CALL SP_INS_PERSONA( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, @V_ID );", [idtipo_persona, nombre, ape_pat, ape_mat, idtipo_documento, num_documento, ruc, correo, direccion_notificacion, telefono], function (err, result) {
         try {
@@ -46,7 +46,7 @@ controller.save = async (req, res) => {
     });
 };
 
-controller.edit = async (req, res) => {
+export const edit = async (req, res) => {
     const id = parseInt(req.params.id);
     const { idtipo_persona, nombre, idtipo_documento, num_documento, ruc, correo, direccion_notificacion, telefono } = req.body;
     conn.query("update persona set idtipo_persona = ?, nombre = ?, ape_pat = ?, ape_mat = ?, idtipo_documento = ?, num_documento = ?, ruc = ?, correo = ?, direccion_notificacion = ?, telefono = ? where idpersona = ?;", [telefono, direccion_notificacion, correo, ruc, num_documento, idtipo_documento, ape_mat, ape_pat, nombre, idtipo_persona, id], function (err, result) {
@@ -58,7 +58,7 @@ controller.edit = async (req, res) => {
     });
 };
 
-controller.delete = async (req, res) => {
+export const deletee = async (req, res) => {
     const id = parseInt(req.params.id);
     conn.query("delete from persona where idpersona = ?;", [id], function (err, result) {
         try {
@@ -69,7 +69,7 @@ controller.delete = async (req, res) => {
     });
 };
 
-controller.retornarid = async (req, res) => {
+export const retornarid = async (req, res) => {
     const ruc = parseInt(req.params.ruc);
     const num_documento = parseInt(req.params.num_documento);
     // const { ruc, num_documento } = req.body;
@@ -82,7 +82,7 @@ controller.retornarid = async (req, res) => {
     });
 };
 
-controller.updurl = async (req, res) => {
+export const updurl = async (req, res) => {
     const id = parseInt(req.params.id);
     const { url } = req.body;
     conn.query("update persona set url = ? where idpersona = ?;", [url, id], function (err, result) {
@@ -94,7 +94,7 @@ controller.updurl = async (req, res) => {
     });
 };
 
-controller.buscarlocalidad = async (req, res) => {
+export const buscarlocalidad = async (req, res) => {
     const query = 'select l.referencia ,l.direccion ,d.nombre distrito '
     +'from persona p '
     +'join persona_localidad pl on p.idpersona = pl.idpersona '
@@ -111,7 +111,7 @@ controller.buscarlocalidad = async (req, res) => {
     });
 };
 
-controller.listarcontribuyentes = async (req, res) => {
+export const listarcontribuyentes = async (req, res) => {
     const query = 'select p.idpersona, p.ruc, p.url ,p.correo ,p.telefono, td.tipo_documento, '
     +'p.num_documento, tp.tipo_persona, '
     +'p.direccion_notificacion, concat(p.nombre," ",p.ape_pat," ",p.ape_mat)nombres '
@@ -130,4 +130,4 @@ controller.listarcontribuyentes = async (req, res) => {
     });
 };
 
-module.exports = controller;
+// module.exports = controller;

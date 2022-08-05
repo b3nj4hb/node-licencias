@@ -1,11 +1,12 @@
-const router = require('express').Router();
+import { Router } from 'express'
+const router = Router()
 
-const rol = require('../controllers/rol.controller');
+import * as rol from '../controllers/rol.controller.js'
 
 router.get('/', rol.list);
 router.get('/:id', rol.search);
 router.post('/add', rol.save);
 router.put('/update/:id', rol.edit);
-router.delete('/delete/:id', rol.delete);
+router.delete('/delete/:id', rol.deletee);
 
 export default router;

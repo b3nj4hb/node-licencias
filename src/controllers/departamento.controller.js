@@ -1,7 +1,7 @@
-import { conn } from "../database";
-const controller = {};
+import { conn } from "../database.js";
+// const controller = {};
 
-controller.list = async (req, res) => {
+export const list = async (req, res) => {
     conn.query("select * from departamento;", function (err, result) {
         try {
             return res.status(200).json(result);
@@ -11,7 +11,8 @@ controller.list = async (req, res) => {
     });
 };
 
-controller.search = async (req, res) => {
+// controller.search = async (req, res) => {
+export const search = async (req, res) => {
     const id = parseInt(req.params.id);
     conn.query("select * from departamento where iddepartamento = ?;", [id], function (err, result) {
         try {
@@ -22,7 +23,7 @@ controller.search = async (req, res) => {
     });
 };
 
-controller.save = async (req, res) => {
+export const save = async (req, res) => {
     const { id, nombre } = req.body;
     conn.query("insert into departamento values(?,?);", [id, nombre], function (err, result) {
         try {
@@ -33,7 +34,7 @@ controller.save = async (req, res) => {
     });
 };
 
-controller.edit = async (req, res) => {
+export const edit = async (req, res) => {
     const id = parseInt(req.params.id);
     const { nombre } = req.body;
     conn.query("update departamento set nombre = ? where iddepartamento = ?;", [nombre, id], function (err, result) {
@@ -45,7 +46,8 @@ controller.edit = async (req, res) => {
     });
 };
 
-controller.delete = async (req, res) => {
+// controller.delete = async (req, res) => {
+export const deletee = async (req, res) => {
     const id = parseInt(req.params.id);
     conn.query("delete from departamento where iddepartamento = ?;", [id], function (err, result) {
         try {
@@ -56,4 +58,4 @@ controller.delete = async (req, res) => {
     });
 };
 
-module.exports = controller;
+// module.exports = controller;

@@ -1,7 +1,7 @@
-import { conn } from "../database";
-const controller = {};
+import { conn } from "../database.js";
+// const controller = {};
 
-controller.list = async (req, res) => {
+export const list = async (req, res) => {
     conn.query("select * from localidad;", function (err, result) {
         try {
             return res.status(200).json(result);
@@ -11,7 +11,7 @@ controller.list = async (req, res) => {
     });
 };
 
-controller.search = async (req, res) => {
+export const search = async (req, res) => {
     const id = parseInt(req.params.id);
     conn.query("select * from localidad where idlocalidad = ?;", [id], function (err, result) {
         try {
@@ -22,7 +22,7 @@ controller.search = async (req, res) => {
     });
 };
 
-controller.save = async (req, res) => {
+export const save = async (req, res) => {
     const {referencia, direccion, iddistrito } = req.body;
     conn.query("insert into localidad values(null,?,?,?);", [referencia, direccion, iddistrito], function (err, result) {
         try {
@@ -33,7 +33,7 @@ controller.save = async (req, res) => {
     });
 };
 
-controller.edit = async (req, res) => {
+export const edit = async (req, res) => {
     const id = parseInt(req.params.id);
     const { referencia } = req.body;
     conn.query("update localidad set referencia = ?, direccion = ?, iddistrito = ? where idlocalidad = ?;", [iddistrito, direccion, referencia, id], function (err, result) {
@@ -45,7 +45,7 @@ controller.edit = async (req, res) => {
     });
 };
 
-controller.delete = async (req, res) => {
+export const deletee = async (req, res) => {
     const id = parseInt(req.params.id);
     conn.query("delete from localidad where idlocalidad = ?;", [id], function (err, result) {
         try {
@@ -56,7 +56,7 @@ controller.delete = async (req, res) => {
     });
 };
 
-controller.retornarid = async (req, res) => {
+export const retornarid = async (req, res) => {
     const referencia = String(req.params.referencia);
     const direccion = String(req.params.direccion);
     // const { ruc, num_documento } = req.body;
@@ -69,4 +69,4 @@ controller.retornarid = async (req, res) => {
     });
 };
 
-module.exports = controller;
+// module.exports = controller;

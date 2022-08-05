@@ -1,11 +1,12 @@
-const router = require('express').Router();
+import { Router } from 'express'
+const router = Router()
 
-const tipo_documento = require('../controllers/tipo_documento.controller');
+import * as tipo_documento from '../controllers/tipo_documento.controller.js'
 
 router.get('/', tipo_documento.list);
 router.get('/:id', tipo_documento.search);
 router.post('/add', tipo_documento.save);
 router.put('/update/:id', tipo_documento.edit);
-router.delete('/delete/:id', tipo_documento.delete);
+router.delete('/delete/:id', tipo_documento.deletee);
 
 export default router;

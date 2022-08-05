@@ -1,7 +1,7 @@
-import { conn } from "../database";
+import { conn } from "../database.js";
 const controller = {};
 
-controller.list = async (req, res) => {
+export const list = async (req, res) => {
     conn.query("select * from rol;", function (err, result) {
         try {
             return res.status(200).json(result);
@@ -11,7 +11,7 @@ controller.list = async (req, res) => {
     });
 };
 
-controller.search = async (req, res) => {
+export const search = async (req, res) => {
     const id = parseInt(req.params.id);
     conn.query("select * from rol where idrol = ?;", [id], function (err, result) {
         try {
@@ -22,7 +22,7 @@ controller.search = async (req, res) => {
     });
 };
 
-controller.save = async (req, res) => {
+export const save = async (req, res) => {
     const { id, rol } = req.body;
     conn.query("insert into rol values(?,?);", [id, rol], function (err, result) {
         try {
@@ -33,7 +33,7 @@ controller.save = async (req, res) => {
     });
 };
 
-controller.edit = async (req, res) => {
+export const edit = async (req, res) => {
     const id = parseInt(req.params.id);
     const { rol } = req.body;
     conn.query("update rol set rol = ? where idrol = ?;", [rol, id], function (err, result) {
@@ -45,7 +45,7 @@ controller.edit = async (req, res) => {
     });
 };
 
-controller.delete = async (req, res) => {
+export const deletee = async (req, res) => {
     const id = parseInt(req.params.id);
     conn.query("delete from rol where idrol = ?;", [id], function (err, result) {
         try {
@@ -56,4 +56,4 @@ controller.delete = async (req, res) => {
     });
 };
 
-module.exports = controller;
+// module.exports = controller;
